@@ -101,8 +101,8 @@ header {
 
 /* Book box */
 .book {
-    /*display: none;*/
-    display: flex;
+    display: none;
+    /*display: flex;*/
     flex-direction: column;
     gap: 15px;
     border-radius: 15px;
@@ -176,3 +176,81 @@ header {
 }
 
 /* Modal */
+.modal.inactive {
+    display: none;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_box {
+    width: min(90%, 275px);
+    background: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    gap: 20px;
+    border-radius: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.inp {
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 18px;
+    vertical-align: baseline;
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+}
+
+.valid {
+    background: #87edacf7;
+    border: 2px solid #22c55e;
+}
+
+.invalid {
+    background: #e06565dd;
+    border: 2px solid#dc2626;
+}
+
+.inp, 
+.btn.read {
+    width: 100%;
+}
+
+label[for='read']{
+    font-size: 20px;
+    color: #42445A;
+}
+
+.check {
+    display: flex;
+    gap: 20px;
+}
+
+.btn.read:hover {
+    background: #22c55e;
+}

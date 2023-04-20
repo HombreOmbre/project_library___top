@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="shortcut icon" href="./images/favicon-32x32.png" type="image/x-icon">
+    <link rel="TOP icon" href="./images/favicon-32x32.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Signika+Negative:wght@400;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
     <header>
         <div class="head">
-          <a href='#' class="logo">Library</a>
+          <a href='#' class="logo">LIBRARY</a>
           <button type='button' class='log btn'>
             Log In
           </button>
@@ -25,16 +25,26 @@
       </div>
       <div class='container'>
         <div class='book'>
-          <p class='title'>Harry Potter</p>
-          <p class='author'>J.K. Rowling</p>
-          <p class='pages'>552</p>
+          <p class='book_title'>Harry Potter</p>
+          <p class='book_author'>J.K. Rowling</p>
+          <p class='book_pages'>552</p>
             <button type='button' class='btn read'>Read</button>
             <button type='button' class="btn remove">Remove</button>
           </div>
       </div>
-      <div class="modal">
+      <div class="modal inactive">
         <div class="modal_box">
-            
+            <h2 class="main_txt">Add new book</h2>
+            <form action="POST">
+                <input type="text" name="title" id="title" class="inp" placeholder="title" required>
+                <input type="text" name="author" id="author" class="inp" placeholder="author" required>
+                <input type="tel" name="pages" class="inp" placeholder="pages" required>
+                <div class="check">
+                    <label for="read">Have you read it?</label>
+                    <input type="checkbox" name="read" id="read" class="read_check">
+                </div>
+                <button type="submit" class="btn read">Submit</button>
+        </form>
         </div>
       </div>
 
