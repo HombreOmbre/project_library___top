@@ -1,0 +1,178 @@
+html {
+    box-sizing: border-box;
+}
+  
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: arial;
+    font-size: 16px;
+    font-weight: 400;
+    background: #E7E7E9;
+    font-family: 'Signika Negative', sans-serif;
+}
+
+/* Header */
+header {
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    margin-bottom: 40px;
+}
+
+.head {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.head a {
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 32px;
+    color: #42445A;
+}
+
+.btn.log {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-weight: 700;
+    background: #eee;
+    color: #42445A;
+    border-radius: 15px;
+    align-self: center;
+}
+
+.log:hover {
+    transform: scale(1.05);
+    background: #42445A;
+    color: #eee;
+    transition: all ease-in .4s;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    color: #42445A;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.add_btn:hover {
+    background: #42445A;
+    color: #eee;
+    transition: all ease-in .3s;
+}
+
+/* Container for books */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 20px 40px;
+    background: transparent;
+    gap: 40px;
+}
+
+/* Book box */
+.book {
+    /*display: none;*/
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 15px;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+}
+
+.book p {
+    font-weight: 700;
+    font-size: 20px;
+    align-self: center;
+    color: #42445A;
+}
+
+.btn_box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px 0;
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    color: #42445A;
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 15px -6px rgba(66, 68, 90, 1);
+}
+
+.btn.read {
+    background: #22c55e;
+}
+
+.btn.notread {
+    background: #dc2626;
+    color: #eee;
+}
+
+.btn.notread:hover {
+    transform: scale(1.03);
+    background: #22c55e;
+    color: #42445A;
+    transition: all ease-in .3s;
+}
+
+.btn.read:hover {
+    transform: scale(1.03);
+    background: #dc2626;
+    color: #eee;
+    transition: all ease-in .3s;
+}
+
+.btn.remove {
+    background: #0ea5e9;
+}
+
+.btn.remove:hover {
+    transform: scale(1.03);
+    background: #42445A;
+    color: #eee;
+    transition: all ease-in .3s;
+}
+
+/* Modal */
