@@ -6,11 +6,13 @@ const checkbox = document.querySelector("#read");
 const submitBtn = document.querySelector("#submit");
 const myLibrary = [];
 
-function Book(bookTitle, bookAuthor, bookPages, read) {
-  this.bookTitle = bookTitle;
-  this.bookAuthor = bookAuthor;
-  this.bookPages = bookPages;
-  this.read = read;
+class Book {
+  constructor(bookTitle, bookAuthor, bookPages, read) {
+    this.bookTitle = bookTitle;
+    this.bookAuthor = bookAuthor;
+    this.bookPages = bookPages;
+    this.read = read;
+  }
 }
 
 function getValueAboutBook(e) {
