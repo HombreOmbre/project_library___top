@@ -165,6 +165,11 @@ function openModal() {
 function closeModal(e) {
   if (e.target.classList.value === "modal active") {
     modal.classList.remove("active");
+    modalInputs.forEach((input) => {
+      input.classList.remove("valid");
+      input.classList.remove("invalid");
+      input.value = "";
+    });
   }
 }
 
