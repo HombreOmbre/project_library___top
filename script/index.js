@@ -16,160 +16,129 @@ class Book {
 }
 
 function getValueAboutBook(e) {
-  e.preventDefault();
-  const arrWithInputs = [...modalInputs];
-  const arrWithValidValues = [];
-  const userRead = checkbox.checked;
-  const books = document.querySelectorAll(".book");
-
-  for (let i = 0; i < arrWithInputs.length; i++) {
-    if (arrWithInputs[i].classList[1] === "valid") {
-      arrWithValidValues.push(arrWithInputs[i]);
-    }
+  if (!modalInputs[0].validity.valid) {
+    getInput.call(modalInputs[0]);
   }
 
-  if (arrWithValidValues.length === 3) {
+  if (!modalInputs[1].validity.valid) {
+    getInput.call(modalInputs[1]);
+  }
+
+  if (!modalInputs[2].validity.valid) {
+    getInput.call(modalInputs[2]);
+    e.preventDefault();
+    return;
+  }
+
+  if ([...modalInputs].every((input) => input.className === "inp valid")) {
     myLibrary.push(
       new Book(
-        arrWithValidValues[0].value,
-        arrWithValidValues[1].value,
-        arrWithValidValues[2].value,
-        userRead
+        modalInputs[0].value,
+        modalInputs[1].value,
+        modalInputs[2].value,
+        checkbox.checked
       )
     );
-  } else {
-    alert("Please check the correctness of the filled fields");
+
+    renderTheBookCard();
+    e.preventDefault();
+    modal.classList.remove("active");
+    clearInputs();
   }
-
-  for (let i = books.length; i < myLibrary.length; i++) {
-    showTheBookCard(myLibrary[i], i);
-  }
-
-  modalInputs.forEach((inp) => {
-    inp.value = "";
-    inp.classList.remove("valid");
-    inp.removeEventListener("input", getInput);
-    inp.addEventListener("blur", getInput);
-  });
-
-  checkbox.checked = false;
-  modal.classList.remove("active");
 }
 
 function removeBookCard(e) {
   if (e.target.classList[1] === "remove") {
-    myLibrary.splice(this.dataset.id, 1);
+    myLibrary.splice(this.dataset.index, 1);
     this.remove();
-    const books = document.querySelectorAll(".book");
-    const arrWithBooks = [...books];
-    for (let i = 0; i < arrWithBooks.length; i++) {
-      arrWithBooks[i].dataset.id = i;
-    }
   }
+  renderTheBookCard();
 }
 
 function changeBookStatus(e) {
   if (e.target.classList[1] === "read") {
-    e.target.classList.remove("read");
-    e.target.classList.add("notread");
-    e.target.textContent = "Not read";
-    myLibrary[this.dataset.id].read = false;
+    myLibrary[this.dataset.index].read = false;
   } else if (e.target.classList[1] === "notread") {
-    e.target.classList.remove("notread");
-    e.target.classList.add("read");
-    e.target.textContent = "Read";
-    myLibrary[this.dataset.id].read = true;
+    myLibrary[this.dataset.index].read = true;
   }
+  renderTheBookCard();
 }
 
-function showTheBookCard(bookObj, idOfBook) {
-  const div = document.createElement("div");
+function renderTheBookCard() {
+  containerForBooks.innerHTML = "";
 
-  div.classList.add("book");
-  div.dataset.id = idOfBook;
-  div.innerHTML = `
-    <p class='book_title'>"${bookObj.bookTitle}"</p>
-    <p class='book_author'>${bookObj.bookAuthor}</p>
-    <p class='book_pages'>${bookObj.bookPages}</p>
-    <div class='btn_box'>
-      <button type='button' class='btn ${bookObj.read ? "read" : "notread"}'>${
-    bookObj.read ? "Read" : "Not read"
-  }</button>
-      <button type='button' class="btn remove">Remove</button>
-    </div>
-  `;
+  for (let i = 0; i < myLibrary.length; i++) {
+    containerForBooks.innerHTML += `
+      <div class='book' data-index='${i}'>
+        <p class='book_title'>"${myLibrary[i].bookTitle}"</p>
+        <p class='book_author'>${myLibrary[i].bookAuthor}</p>
+        <p class='book_pages'>${myLibrary[i].bookPages}</p>
+        <div class='btn_box'>
+          <button type='button' class='btn ${
+            myLibrary[i].read ? "read" : "notread"
+          }'>${myLibrary[i].read ? "Read" : "Not read"}</button>
+          <button type='button' class="btn remove">Remove</button>
+        </div>
+      </div>
+    `;
+  }
 
-  containerForBooks.appendChild(div);
   const books = document.querySelectorAll(".book");
   books.forEach((book) => book.addEventListener("click", removeBookCard));
   books.forEach((book) => book.addEventListener("click", changeBookStatus));
 }
 
-function showInputStatus(value, type) {
-  switch (type) {
-    case "title":
-      if (checkTitleAndAuthorValidation(value)) {
-        modalInputs[0].classList.remove("invalid");
-        modalInputs[0].classList.add("valid");
-      } else {
-        modalInputs[0].classList.remove("valid");
-        modalInputs[0].classList.add("invalid");
-      }
-      break;
-    case "author":
-      if (checkTitleAndAuthorValidation(value)) {
-        modalInputs[1].classList.remove("invalid");
-        modalInputs[1].classList.add("valid");
-      } else {
-        modalInputs[1].classList.remove("valid");
-        modalInputs[1].classList.add("invalid");
-      }
-      break;
-    case "pages":
-      if (checkNumbersOfPages(value)) {
-        modalInputs[2].classList.remove("invalid");
-        modalInputs[2].classList.add("valid");
-      } else {
-        modalInputs[2].classList.remove("valid");
-        modalInputs[2].classList.add("invalid");
-      }
-      break;
-    default:
-      alert("Ups! Something went wrong!\n Please, Refresh page.");
+function showError(input) {
+  if (input.validity.valueMissing) {
+    input.className = "inp invalid";
+    input.parentElement.lastElementChild.textContent = "Please fill this field";
+  } else if (input.type === "text") {
+    if (input.validity.tooShort) {
+      input.className = "inp invalid";
+      input.parentElement.lastElementChild.textContent = `Book ${input.id} should be at least ${input.minLength} characters; you entered ${input.value.length}.`;
+    }
+  } else if (input.type === "number") {
+    if (input.validity.rangeUnderflow) {
+      input.className = "inp invalid";
+      input.parentElement.lastElementChild.textContent = `Number of pages should be at least ${input.min}; you entered ${input.value}.`;
+    }
   }
 }
 
-function checkTitleAndAuthorValidation(str) {
-  const regex = /^[A-Za-z0-9\s\-_,.;:()]+$/;
-
-  return regex.test(str) && str.length >= 5;
-}
-
-function checkNumbersOfPages(nums) {
-  const regex = /[0-9]/;
-
-  return regex.test(+nums) && +nums > 10;
+function validateInput(input) {
+  if (input.validity.valid) {
+    input.className = "inp valid";
+    input.parentElement.lastElementChild.textContent = "";
+  } else {
+    showError(input);
+  }
 }
 
 function getInput() {
   this.removeEventListener("blur", getInput);
   this.addEventListener("input", getInput);
 
-  showInputStatus(this.value, this.id);
+  validateInput(this);
 }
 
 function openModal() {
   modal.classList.add("active");
 }
 
+function clearInputs() {
+  modalInputs.forEach((input) => {
+    input.value = "";
+    input.removeEventListener("input", getInput);
+    input.addEventListener("blur", getInput);
+    input.className = "inp";
+  });
+  checkbox.checked = false;
+}
+
 function closeModal(e) {
-  if (e.target.classList.value === "modal active") {
+  if (e.target.className === "modal active") {
     modal.classList.remove("active");
-    modalInputs.forEach((input) => {
-      input.classList.remove("valid");
-      input.classList.remove("invalid");
-      input.value = "";
-    });
+    clearInputs();
   }
 }
 
