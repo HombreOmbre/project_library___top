@@ -24,29 +24,29 @@
         <button class='add_btn'>+ Add Book</button>
       </div>
       <div class='container'>
-        <!--<div class='book'>
-          <p class='book_title'>Harry Potter</p>
-          <p class='book_author'>J.K. Rowling</p>
-          <p class='book_pages'>552</p>
-          <div class="btn_box">
-            <button type='button' class='btn read'>Read</button>
-            <button type='button' class="btn remove">Remove</button>
-          </div>
-      </div>-->
       </div>
       <div class="modal">
         <div class="modal_box">
             <h2 class="main_txt">Add new book</h2>
-            <form action="POST">
-                <input type="text" name="title" id="title" class="inp" placeholder="title" required>
-                <input type="text" name="author" id="author" class="inp" placeholder="author" required>
-                <input type="tel" name="pages" id="pages" class="inp" placeholder="pages" required>
+            <form novalidate autocomplete="off">
+              <div class="input">
+                <input type="text" name="title" id="title" class="inp"  placeholder="title" minlength="6" required>
+                <span class="error"></span>
+              </div>
+              <div class="input">
+                <input type="text" name="author" id="author" class="inp" placeholder="author" minlength="6" required>
+                <span class="error"></span>
+              </div>
+              <div class="input">
+                <input type="number" name="number" id="pages" class="inp" placeholder="pages" min="25" required>
+                <span class="error"></span>
+              </div>
                 <div class="check">
                     <label for="read">Have you read it?</label>
                     <input type="checkbox" name="read" id="read" class="read_check">
                 </div>
-                <button type="submit" id="submit" class="btn read">Submit</button>
-        </form>
+                <button type="button" id="submit" class="btn read">Submit</button>
+            </form>
         </div>
       </div>
 
