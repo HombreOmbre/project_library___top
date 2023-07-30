@@ -226,6 +226,10 @@ form {
     width: 100%;
 }
 
+.input {
+    width: 100%;
+}
+
 .inp {
     height: 30px;
     border: none;
@@ -247,6 +251,14 @@ form {
 .invalid {
     background: #e06565dd;
     border: 2px solid#dc2626;
+}
+
+.error {
+    display: inline-block;
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 5px;
+    padding-left: 10px;
 }
 
 .inp, 
